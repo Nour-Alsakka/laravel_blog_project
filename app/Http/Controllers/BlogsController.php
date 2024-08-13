@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogRequest;
 use App\Models\Blogs;
 use Illuminate\Http\Request;
 
@@ -26,9 +27,17 @@ class BlogsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
-        return 'store';
+        $check =  Blogs::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'author_id' => 1,
+            'image' => $request->image,
+            'slider' => $request->slider,
+        ]);
+        if ($check) return back()->with('success', 'The blog has inserted successfully.');
+        else return back()->withErrors(['errors', 'something happend']);
     }
 
     /**

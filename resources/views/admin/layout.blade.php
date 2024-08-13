@@ -28,7 +28,7 @@
                 <li><a href="{{ route('logout') }}">Logout</a></li>
             </ul>
         </div>
-        <div class="main col-10 bg-info">
+        <div class="main col-10">
             @yield('main')
         </div>
     </div>

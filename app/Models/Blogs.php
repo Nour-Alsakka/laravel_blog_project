@@ -16,4 +16,9 @@ class Blogs extends Model
         'author_id',
         'slider'
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(Authors::class, 'author_id');
+    }
 };

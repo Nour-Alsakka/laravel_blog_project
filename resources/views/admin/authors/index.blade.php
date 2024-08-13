@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('main')
-    <a class="btn btn-primary" href="{{ route('dashboard.blogs.create') }}">add blog</a>
+    <a class="btn btn-primary" href="{{ route('dashboard.authors.create') }}">add blog</a>
     {{-- <a class="btn" href="{{ url('dashboard/blogs/create') }}">add blog</a> --}}
     <table id="myTable" class="display">
         <thead>
@@ -15,14 +15,14 @@
         </thead>
         <tbody>
 
-            @foreach ($blogs as $blog)
+            @foreach ($authors as $author)
                 <tr>
                     <td class="col-2">
-                        <img src="{{ url('storage/media/' . $blog->image) }}" alt=""
+                        <img src="{{ url('storage/media/' . $author->image) }}" alt=""
                             style="width: 40px;object-fit:cover">
                     </td>
-                    <td class="col-4">{{ $blog->title }}</td>
-                    <td class="col-4">{{ $blog->content }}</td>
+                    <td class="col-4">{{ $author->name }}</td>
+                    <td class="col-4">{{ $author->description }}</td>
                     <td class="col-2">delete</td>
                 </tr>
             @endforeach

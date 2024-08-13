@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,6 @@ Route::group(
     function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
         Route::resource('blogs', BlogsController::class);
+        Route::resource('authors', AuthorsController::class);
     }
 );

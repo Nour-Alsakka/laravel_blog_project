@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('filepond/filepond.min.css') }}">
     {{-- JS files --}}
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/datatables.min.js') }}"></script>
+    <script src="{{ asset('filepond/filepond.min.js') }}"></script>
+
 
 
 

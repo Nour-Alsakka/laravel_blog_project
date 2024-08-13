@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
+use App\Models\Authors;
 use App\Models\Blogs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -23,28 +24,21 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        return view('admin.blogs.create');
+        $authors = Authors::get();
+        return view('admin.blogs.create', compact('authors'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBlogRequest $request)
+    public function store(Request $request)
     {
-        if (!File::exists(storage_path('app/public/media'))) {
-            File::makeDirectory(storage_path('app/public/media'));
-        }
-
-        $file = $request->image;
-        $name = $file->hashName();
-        $filename = time() . '.' . $name;
-        $file->storeAs('public/media/', $filename);
 
         $check =  Blogs::create([
             'title' => $request->title,
             'content' => $request->content,
-            'author_id' => 1,
-            'image' => $filename,
+            'author_id' => $request->author_id,
+            'image' => $request->image,
             'slider' => $request->slider,
         ]);
         if ($check) return back()->with('success', 'The blog has inserted successfully.');

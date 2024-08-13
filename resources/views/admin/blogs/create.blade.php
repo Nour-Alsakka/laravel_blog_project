@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="content">content:</label>
-                    <textarea type="text" id="content" name="content" class="form-control" value="{{ old('content', '') }}"></textarea>
+                    <textarea type="text" id="content" name="content" class="form-control">{{ old('content', '') }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="image">Image:</label>
@@ -31,12 +31,16 @@
                 </div>
                 <div class="mb-3">
                     <label for="author">Author:</label>
-                    <input type="text" id="author" name="author" class="form-control"
-                        value="{{ old('author', '') }}">
+                    <select name="author_id" id="author" value="{{ old('author_id', '') }}">
+                        @foreach ($authors as $author)
+                            <option value="{{ $author->id }}">{{ $author->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="slider">Slider:</label>
                     <select name="slider" id="slider" value="{{ old('slider', '') }}">
+
                         <option value="0">No</option>
                         <option value="1">Yes</option>
                     </select>
@@ -45,4 +49,18 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const inputElement = document.querySelector('input[id="image"]');
+        const pond = FilePond.create(inputElement);
+
+        FilePond.setOptions({
+            server: {
+                url: '/dashboard/upload',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }
+        });
+    </script>
 @endsection

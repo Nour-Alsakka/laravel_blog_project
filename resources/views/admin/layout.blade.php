@@ -8,27 +8,40 @@
     {{-- CSS files --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
     {{-- JS files --}}
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
+
+
+
+    {{-- <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/tom-select.css') }}">
+    <script src="{{ asset('js/tom-select.js') }}"></script> --}}
+
+
 
 
     <title>Blog</title>
 </head>
 
 <body>
-    <div class="row p-0 m-0 bg-secondary">
-        <div class="sidbar col-2 bg-warning p-2" style="height:100vh">
+    <div class="row p-0 m-0">
+        <div class="sidbar col-2 p-2 bg-secondary" style="height:100vh">
             <img class="img-fluid" src="{{ asset('images/logo.png') }}" alt="">
             <h2>Nawara Blog</h2>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Blogs</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Authors</a></li>
+                <li><a href="{{ url('dashboard/') }}">Home</a></li>
+                <li><a href="{{ url('dashboard/blogs') }}">Blogs</a></li>
+                {{-- <li><a href="{{ route('dashboard.blogs.index') }}">Blogs</a></li> --}}
+                <li><a href="{{ url('dashboard/categories') }}">Categories</a></li>
+                <li><a href="{{ url('dashboard/authors') }}">Authors</a></li>
                 <li><a href="{{ route('logout') }}">Logout</a></li>
             </ul>
         </div>
-        <div class="main col-10">
+        <div class="main col-10 p-2">
             @yield('main')
         </div>
     </div>

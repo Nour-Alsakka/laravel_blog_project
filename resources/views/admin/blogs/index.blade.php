@@ -1,5 +1,5 @@
 @extends('admin.layout')
 
 @section('main')
-    index
+    <a class="btn" href="{{ url('dashboard/blogs/create') }}">add blog</a>
 @endsection

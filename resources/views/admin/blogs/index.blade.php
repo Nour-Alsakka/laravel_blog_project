@@ -10,6 +10,7 @@
                 <th scope="col">image</th>
                 <th scope="col">title</th>
                 <th scope="col">content</th>
+                <th scope="col">author</th>
                 <th scope="col">actions</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                     </td>
                     <td class="col-4">{{ $blog->title }}</td>
                     <td class="col-4">{{ $blog->content }}</td>
+                    <td class="col-4">{{ $blog->author->name }}</td>
                     <td class="col-2">delete</td>
                 </tr>
             @endforeach

@@ -45,6 +45,16 @@
                         <option value="1">Yes</option>
                     </select>
                 </div>
+
+                <div class="mb-3">
+                    <label for="categories">categories:</label>
+                    <select name="slider" id="categories" value="{{ old('categories', '') }}">
+
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

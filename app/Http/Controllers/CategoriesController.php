@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBlogRequest;
-use App\Models\Authors;
-use App\Models\Blogs;
 use App\Models\Categories;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
-class BlogsController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $blogs = Blogs::with('author')->get();
-        return view('admin.blogs.index', compact('blogs'));
+        $categories = Categories::get();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -25,9 +21,7 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        $authors = Authors::get();
-        $categories = Categories::get();
-        return view('admin.blogs.create', compact('authors', 'categories'));
+        return view('admin.categories.create');
     }
 
     /**
@@ -35,21 +29,18 @@ class BlogsController extends Controller
      */
     public function store(Request $request)
     {
-        $check =  Blogs::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'author_id' => $request->author_id,
+        $check =  Categories::create([
+            'name' => $request->name,
             'image' => $request->image,
-            'slider' => $request->slider,
         ]);
-        if ($check) return back()->with('success', 'The blog has inserted successfully.');
+        if ($check) return back()->with('success', 'The category has inserted successfully.');
         else return back()->withErrors(['errors', 'something happend']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Blogs $blogs)
+    public function show(Categories $categories)
     {
         //
     }
@@ -57,7 +48,7 @@ class BlogsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Blogs $blogs)
+    public function edit(Categories $categories)
     {
         //
     }
@@ -65,7 +56,7 @@ class BlogsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blogs $blogs)
+    public function update(Request $request, Categories $categories)
     {
         //
     }
@@ -73,7 +64,7 @@ class BlogsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blogs $blogs)
+    public function destroy(Categories $categories)
     {
         //
     }

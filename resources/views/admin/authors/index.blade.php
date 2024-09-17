@@ -1,15 +1,15 @@
 @extends('admin.layout')
 
 @section('main')
-    <a class="btn btn-primary" href="{{ route('dashboard.authors.create') }}">add blog</a>
+    <a class="btn btn-primary" href="{{ route('dashboard.authors.create') }}">Add Author</a>
     {{-- <a class="btn" href="{{ url('dashboard/blogs/create') }}">add blog</a> --}}
     <table id="myTable" class="display">
         <thead>
 
             <tr>
-                <th scope="col">image</th>
-                <th scope="col">title</th>
-                <th scope="col">content</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
                 <th scope="col">actions</th>
             </tr>
         </thead>

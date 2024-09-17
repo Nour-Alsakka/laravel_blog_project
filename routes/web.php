@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\BlogsController;
@@ -14,6 +15,27 @@ Route::get('/', [SiteController::class, 'index'])->name('index');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'login_check'])->name('login_check');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+// Route::controller(LoginRegisterController::class)->group(function () {
+//     Route::get('/register', 'register')->name('register');
+//     Route::post('/store', 'store')->name('store');
+//     Route::get('userlogin', 'login')->name('userlogin');
+//     Route::post('/authenticate', 'authenticate')->name('authenticate');
+//     Route::get('/site/index', 'mainsite')->name('mainsite');
+//     Route::post('/logout', 'logout')->name('logout');
+// });
+// Route::group([
+//     'middleware' => ['guest'],
+//     'controller' => [LoginRegisterController::class],
+// ], function () {
+//     Route::get('/register', 'register')->name('register');
+//     Route::post('/store', 'store')->name('store');
+//     Route::get('/userlogin', 'login')->name('userlogin');
+//     Route::post('/authenticate', 'authenticate')->name('authenticate');
+//     Route::get('/dashboard', 'dashboard')->withoutMiddleware(['guest'])->name('dashboard');
+//     Route::post('/logout', 'logout')->withoutMiddleware(['guest'])->name('logout');
+// });
 
 Route::group(
     [

@@ -34,7 +34,7 @@
     <div class="row p-0 m-0">
         <div class="sidbar col-2 p-2 bg-secondary" style="height:100vh">
             <img class="img-fluid" src="{{ asset('images/logo.png') }}" alt="">
-            <h2>Nawara Blog</h2>
+            <h2>N Blog</h2>
             <ul>
                 <li><a href="{{ url('dashboard/') }}">Home</a></li>
                 <li><a href="{{ url('dashboard/blogs') }}">Blogs</a></li>

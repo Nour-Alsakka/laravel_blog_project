@@ -1,33 +1,33 @@
 @extends('admin.layout')
 
 @section('cssAndJs')
-    <link rel="stylesheet" href="{{ asset('filepond/filepond.min.css') }}">
-    <script src="{{ asset('filepond/filepond.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('filepond/filepond.min.css') }}">
+<script src="{{ asset('filepond/filepond.min.js') }}"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
 
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 @endsection
 
 @section('main')
-    @if ($errors->any())
-        <ol>
-            @foreach ($errors->all() as $error)
-                <li style="color: red;font-size: 28px">{{ $error }}</li>
-            @endforeach
-        </ol>
-    @endif
+@if ($errors->any())
+<ol>
+    @foreach ($errors->all() as $error)
+    <li style="color: red;font-size: 28px">{{ $error }}</li>
+    @endforeach
+</ol>
+@endif
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
 
-    <form action="{{ route('dashboard.posts.update', [$blog->id]) }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('put')
-        <div class="card">
+<form action="{{ route('dashboard.posts.update', [$blog->id]) }}" method="post" enctype="multipart/form-data">
+    @csrf
+    @method('put')
+    <div class="card">
             <div class="card-header text-center">
                 <h5>Edit Blog</h5>
             </div>
@@ -59,21 +59,21 @@
                         <div class="col-2">
                             Current Image
                             <img src="{{ url('storage/media/' . $blog->image) }}" alt=""
-                                style="width:100%;height:100px;object-fit:cover">
+                            style="width:100%;height:100px;object-fit:cover">
                         </div>
                     </div>
                 </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="author_id" class="form-label">Blog's Author</label>
                     <select name="author_id" id="author_id" class="mt-2">
                         @foreach ($authors as $author)
-                            <option value={{ $author->id }} @if ($author->id == $blog->author_id) selected @endif>
-                                {{ $author->name }}
-                            </option>
+                        <option value={{ $author->id }} @if ($author->id == $blog->author_id) selected @endif>
+                            {{ $author->name }}
+                        </option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="mb-3">
                     <label for="slider" class="form-label">Slider</label>
@@ -99,7 +99,7 @@
                 <select id="categories" name="categories[]" multiple autocomplete="on">
                     @foreach ($categories as $category)
 
-                        @foreach ($blog->categories as $cate)
+                    @foreach ($blog->categories as $cate)
                             <option
                             value='{{$category->id}}'>
                             @if ($category->id == $cate->id) selected @endif
@@ -112,9 +112,9 @@
             </div> --}}
 
 
-                <div class="mb-3 text-center">
-                    <button type="submit" class="btn btn-secondary w-50">Update blog</button>
-                </div>
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-secondary w-50">Update blog</button>
+            </div>
             </div>
         </div>
     </form>
@@ -140,9 +140,9 @@
 
         });
 
-        new TomSelect("#author_id", {
+        // new TomSelect("#author_id", {
 
-        });
+        // });
 
         var quill = new Quill('#editor', {
             theme: 'snow'

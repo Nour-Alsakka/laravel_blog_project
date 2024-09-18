@@ -9,6 +9,7 @@ use App\Models\Blogs;
 use App\Models\Categories;
 use App\Models\categoriesPosts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
@@ -23,7 +24,11 @@ class BlogsController extends Controller
         //     ->select('blogs.*', 'authors.name as author_name')
         //     ->get();
 
-        $blogs = Blogs::with('author')->get();
+        if (Auth::user()->hasRole('owner')) {
+            $blogs = Blogs::with('author')->get();
+        } else {
+            $blogs = Blogs::with('author')->where('author_id', Auth::user()->id)->get();
+        }
 
         return  View('admin.blogs.index', compact('blogs'));
     }
@@ -33,11 +38,11 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        $authors = Authors::get();
+        // $authors = Authors::get();
         $categories = Categories::get();
         // $authors = DB::table('authors')->get();
 
-        return  View('admin.blogs.create', compact('authors', 'categories'));
+        return  View('admin.blogs.create', compact('categories'));
     }
 
     /**
@@ -94,13 +99,18 @@ class BlogsController extends Controller
     {
         $blog = Blogs::with('author', 'categories')->find($id);
         $authors = Authors::get();
-
         $categories = Categories::get();
-        // $post_categories = categoriesPosts::where('post_id', $id)->get();
-        // return $post_categories;
-        // return $blog->categories->pluck('id')->toArray();
-        // return $blog;
-        return view('admin.blogs.edit', compact('blog', 'authors', 'categories'));
+        if (Auth::user()->hasRole('owner') || Auth::user()->id == $blog->author->id) {
+            // return Auth::user()->id == $blog->author->id;
+
+            // $post_categories = categoriesPosts::where('post_id', $id)->get();
+            // return $post_categories;
+            // return $blog->categories->pluck('id')->toArray();
+            // return $blog;
+            return view('admin.blogs.edit', compact('blog', 'authors', 'categories'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -116,7 +126,7 @@ class BlogsController extends Controller
 
         $blog->title = $request->title;
         $blog->content = $request->content;
-        $blog->author_id = $request->author_id;
+        // $blog->author_id = $request->author_id;
         $blog->slider = $request->slider;
 
         if ($request->image != null) {

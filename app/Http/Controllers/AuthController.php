@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
@@ -22,19 +23,34 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:250',
             'email' => 'required|email|max:250|unique:users',
-            'password' => 'required|min:4'
+            'password' => 'required|min:4',
+            'description' => 'required|min:10',
         ]);
+
+        if (!File::exists(storage_path('app/public/media'))) {
+            File::makeDirectory(storage_path('app/public/media'));
+        }
+        $file = $request->image;
+        if ($file) {
+            $name = $file->hashName();
+            $filename = time() . '.' . $name;
+            $file->storeAs('public/media/', $filename);
+        } else {
+            $filename = '';
+        }
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'description' => $request->description,
+            'image' => $filename,
         ]);
 
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect('/dashboard')
+        return redirect('/dashboard/posts')
             ->withSuccess('You have successfully registered & logged in!');
     }
     public function login()
@@ -50,7 +66,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $request->session()->regenerate();
-            return redirect('/dashboard');
+            return redirect('/dashboard/posts');
         } else {
             return 'wrong data';
         }
@@ -65,6 +81,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect('/');
     }
 }

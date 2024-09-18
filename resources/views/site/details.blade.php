@@ -4,9 +4,13 @@
     <div class="container mb-4" style="padding-top: 76px">
         <img src="{{ url('storage/media/' . $blog->image) }}" alt="" style="width:100%;height:70vh;object-fit:cover">
         <div class="py-3">
-
-            <img src="{{ url('storage/media/' . $blog->author->image) }}"
-                style="margin-right:4px;width: 40px; height:40px;object-fit:cover;" alt="">
+            @if ($blog->author->image)
+                <img src="{{ url('storage/media/' . $blog->author->image) }}"
+                    style="margin-right:4px;width: 40px; height:40px;object-fit:cover;" alt="">
+            @else
+                <img class="img-fluid " src="{{ asset('images/user.png') }}"
+                    style="margin-right:4px;width: 40px; height:40px;object-fit:cover;">
+            @endif
             {{ $blog->author->name }}
 
             <span class="mx-2 font-bold">|</span>

@@ -67,9 +67,12 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoriesRequest $request, Categories $category)
+    public function update(Request $request, Categories $category)
     {
         // dd($author);
+        $request->validate([
+            'name' => 'required|string|max:250',
+        ]);
         $category->name = $request->name;
 
         if ($request->image != null) {

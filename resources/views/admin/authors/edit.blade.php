@@ -21,7 +21,7 @@
 </div>
 @endif
 
-<form action="{{route('dashboard.authors.update',[$author])}}" method="post" enctype="multipart/form-data">
+<form action="{{route('dashboard.authors.update',[$author->id])}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
     <div class="card">

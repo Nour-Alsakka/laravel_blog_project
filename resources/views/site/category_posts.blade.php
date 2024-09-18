@@ -11,9 +11,14 @@
                         src="{{ url('storage/media/' . $blog->image) }}">
 
                     <p>
-                        <img src="{{ url('storage/media/' . $blog->author->image) }}"
-                            style="margin-right:4px;width: 30px; height:30px;object-fit:cover;border-radius:50%;"
-                            alt="">
+                        @if ($blog->author->image)
+                            <img src="{{ url('storage/media/' . $blog->author->image) }}"
+                                style="margin-right:4px;width: 30px; height:30px;object-fit:cover;border-radius:50%;"
+                                alt="">
+                        @else
+                            <img class="img-fluid " src="{{ asset('images/user.png') }}"
+                                style="margin-right:4px;width: 30px; height:30px;object-fit:cover;border-radius:50%;">
+                        @endif
                         <span class="" style="font-size: 12px; color:rgb(157, 4, 4)">
                             {{ $blog->author->name }}
                         </span>

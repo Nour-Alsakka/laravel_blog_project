@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Authors;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Mockery\Exception;
 
 class AuthorsController extends Controller
@@ -16,7 +18,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        $authors = Authors::get();
+        // $authors = Authors::get();
+        $authors = User::get();
 
         return view('admin.authors.index', compact('authors'));
     }
@@ -32,14 +35,22 @@ class AuthorsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAuthorRequest $request)
+    public function store(Request $request)
     {
         try {
 
-            //insert to db
-            Authors::create([
+            $request->validate([
+                'name' => 'required|string|max:250',
+                'email' => 'required|email|max:250|unique:users',
+                'password' => 'required|min:4',
+                'description' => 'required|min:10',
+            ]);
+
+            User::create([
                 'name' => $request->name,
-                'description' => $request->des,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'description' => $request->description,
                 'image' => $request->image,
             ]);
 
@@ -63,7 +74,7 @@ class AuthorsController extends Controller
      */
     public function edit($id)
     {
-        $author = Authors::find($id);
+        $author = User::find($id);
 
         return view('admin.authors.edit', compact('author'));
     }
@@ -71,9 +82,10 @@ class AuthorsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAuthorRequest $request, Authors $author)
+    public function update(UpdateAuthorRequest $request, $id)
     {
         // dd($author);
+        $author = User::find($id);
         $author->name = $request->name;
         $author->description = $request->des;
 
@@ -82,15 +94,17 @@ class AuthorsController extends Controller
         }
 
         $author->save();
-        return back()->with('success', 'updated successfully');
+        return redirect('/dashboard/authors')->with('success', 'updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Authors $author)
+    public function destroy($id)
     {
+        $author = User::find($id);
         $author->delete();
         return back();
+        // return redirect('/dashboard/authors');
     }
 }

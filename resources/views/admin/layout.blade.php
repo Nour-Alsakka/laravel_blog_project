@@ -3,19 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/tom-select.css')}}">
-    <script src="{{asset('js/tom-select.js')}}"></script>
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('js/datatables.min.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tom-select.css') }}">
+    <script src="{{ asset('js/tom-select.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
 
     @yield('cssAndJs')
 </head>
@@ -27,10 +28,10 @@
         <div class="col-2 side_bar" style="height: 100vh; position:fixed;">
 
             <div class="my-2">
-                <img class="img-fluid " src="{{asset('images/logo.png')}}" style="width:60px">
+                <img class="img-fluid " src="{{ asset('images/logo.png') }}" style="width:60px">
 
                 <h4 class="text-white mt-2">
-                    {{Auth::user()->name}}
+                    {{ Auth::user()->name }}
                 </h4>
             </div>
 
@@ -38,44 +39,47 @@
             <hr class="text-white m-0 p-0" style="color: #fff" />
 
             <div class="mx-4 text-start">
+                @if (Auth::user()->hasRole('owner'))
+                    <a href="{{ route('dashboard.index') }}">
+                        <div class="menu_item @if (request()->routeIs('dashboard.index')) menu_item_active @endif">
+                            <i class="fa-solid fa-house mx-2"></i>
+                            Home
+                        </div>
+                    </a>
+                @endif
 
-                <a href="{{route('dashboard.index')}}">
-                    <div class="menu_item @if(request()->routeIs('dashboard.index')) menu_item_active @endif">
-                        <i class="fa-solid fa-house mx-2"></i>
-                        Home
-                    </div>
-                </a>
-
-                <a href="{{route('dashboard.posts.index')}}">
-                    <div class="menu_item @if(request()->routeIs('dashboard.posts.*')) menu_item_active @endif">
+                <a href="{{ route('dashboard.posts.index') }}">
+                    <div class="menu_item @if (request()->routeIs('dashboard.posts.*')) menu_item_active @endif">
                         <i class="fa-solid fa fa-book mx-2"></i>
                         Posts
                     </div>
                 </a>
 
-                <a href="{{route('dashboard.categories.index')}}">
-                    <div class="menu_item @if(request()->routeIs('dashboard.categories.*')) menu_item_active @endif">
+                <a href="{{ route('dashboard.categories.index') }}">
+                    <div class="menu_item @if (request()->routeIs('dashboard.categories.*')) menu_item_active @endif">
                         <i class="fa-solid fa fa-folder-open mx-2"></i>
                         Categories
                     </div>
                 </a>
 
-                <a href="{{route('dashboard.authors.index')}}">
-                    <div class="menu_item  @if(request()->routeIs('dashboard.authors.*')) menu_item_active @endif">
-                        <i class="fa-solid fa fa-users mx-2"></i>
-                        Authors
-                    </div>
-                </a>
+                @if (Auth::user()->hasRole('owner'))
+                    <a href="{{ route('dashboard.authors.index') }}">
+                        <div class="menu_item  @if (request()->routeIs('dashboard.authors.*')) menu_item_active @endif">
+                            <i class="fa-solid fa fa-users mx-2"></i>
+                            Authors
+                        </div>
+                    </a>
+                @endif
             </div>
 
             <div class="mx-4 text-start">
-                <a class="logout_link mx-4 text-start text-white" style="bottom: 40px" href="{{url('/') }}">
+                <a class="logout_link mx-4 text-start text-white" style="bottom: 40px" href="{{ url('/') }}">
                     <div class="menu_item">
                         <i class="fa-solid fa-arrow-right mx-2 text-white"></i>
                         Go to the site
                     </div>
                 </a>
-                <a class="logout_link mx-4 text-start text-white" href="{{route('logout') }}">
+                <a class="logout_link mx-4 text-start text-white" href="{{ route('logout') }}">
                     <div class="menu_item">
                         <i class="fa-solid fa-arrow-left mx-2 text-white"></i>
                         logout

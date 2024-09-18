@@ -8,12 +8,21 @@ use App\Models\Blogs;
 use App\Models\Books;
 use App\Models\Categories;
 use App\Models\categoriesPosts;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
     public function index()
     {
+
+        // add role to user
+        $owner = Role::where('name', 'owner')->first();
+        $user = User::where('email', 'admin@admin.com')->first();
+        $user->removeRole($owner);
+        $user->addRole($owner);
+
         $categories = Categories::with(['blogs' => function ($q) {
             $q->limit(4);
         }])->get();

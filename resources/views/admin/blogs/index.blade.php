@@ -25,13 +25,21 @@
                 <tbody>
                     @foreach ($blogs as $blog)
                         <tr>
-                            <td><img src="{{ url('storage/media/' . $blog->image) }}" alt=""
-                                    style="width:100px;height:100px;object-fit:cover"></td>
+                            <td>
+                                <img src="{{ url('storage/media/' . $blog->image) }}" alt=""
+                                    style="width:100px;height:100px;object-fit:cover">
+                            </td>
                             <td><a href="{{ route('dashboard.posts.show', [$blog->id]) }}">{{ $blog->title }}</a></td>
                             <td>{!! substr($blog->content, 0, 50) !!}...</td>
                             <td>
-                                <img src="{{ url('storage/media/' . $blog->author->image) }}"
-                                    style="width: 50px; height:50px;border-radius:50px;margin-right: 4px" alt="">
+                                @if ($blog->author->image)
+                                    <img src="{{ url('storage/media/' . $blog->author->image) }}"
+                                        style="width: 50px; height:50px;border-radius:50px;margin-right: 4px"
+                                        alt="">
+
+                                @else
+                                <img class="img-fluid " src="{{ asset('images/user.png') }}" style="width: 50px; height:50px;border-radius:50px;margin-right: 4px">
+                                @endif
                                 {{ $blog->author->name }}
                             </td>
                             <!-- <td>{{ $blog->author_name }}</td> -->

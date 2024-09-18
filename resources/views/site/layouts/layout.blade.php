@@ -29,13 +29,11 @@
                     src="{{ asset('images/logo.png') }}"></a>
             @auth
                 <a class="navbar-brand mx-5" href="{{ url('/') }}">{{ Auth::user()->name }}</a>
-                <a class=" mx-2" href="{{ url('/dashboard') }}">Go to Dashboard</a>
+                <a class=" mx-2" href="{{ url('/dashboard/posts') }}">Go to Dashboard</a>
             @else
                 <a class=" mx-2" href="{{ url('/register') }}">Register</a>
                 <a class=" mx-2" href="{{ url('/login') }}">Login</a>
             @endauth
-
-            
 
             {{-- <input style="outline: none;" class="right" id="search-box" type="text" oninput="reset_border()"> --}}
             <div class="search-box " style="position: relative;width:400px">

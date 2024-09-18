@@ -1,27 +1,27 @@
 @extends('admin.layout')
 
 @section('cssAndJs')
-<link rel="stylesheet" href="{{asset('filepond/filepond.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('filepond/filepond.min.css') }}">
 
-<script src="{{asset('filepond/filepond.min.js')}}"></script>
+    <script src="{{ asset('filepond/filepond.min.js') }}"></script>
 @endsection
 
 @section('main')
-@if($errors->any())
-<ol>
-    @foreach($errors->all() as $error)
-    <li style="color: red;font-size: 28px">{{$error}}</li>
-    @endforeach
-</ol>
-@endif
+    @if ($errors->any())
+        <ol>
+            @foreach ($errors->all() as $error)
+                <li style="color: red;font-size: 28px">{{ $error }}</li>
+            @endforeach
+        </ol>
+    @endif
 
-@if(session('success'))
-<div class="alert alert-success">
-    {{session('success')}}
-</div>
-@endif
-
-<form action="{{route('dashboard.authors.store')}}" method="post" enctype="multipart/form-data">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+<h2>Add Author</h2>
+    {{-- <form action="{{route('dashboard.authors.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="card">
         <div class="card-header text-center bg-secondary text-white">
@@ -45,19 +45,55 @@
             </div>
         </div>
     </div>
-</form>
+</form> --}}
+    <form action="{{ route('dashboard.authors.store') }}" method="post" class="form-outline p-2" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="name" name="name" id="name" class="form-control">
+            {{-- @error('name')
+                        <div class="error text-danger">{{ $errors->first('name') }}</div>
+                    @enderror --}}
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" name="email" id="email" class="form-control">
+            @error('email')
+                <div class="error text-danger">{{ $errors->first('email') }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" name="password" id="password" class="form-control">
+            @error('password')
+                <div class="error text-danger">{{ $errors->first('password') }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label"> Image</label>
+            <input type="file" class="form-control" name="image" id="image">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Bio:</label>
+            <input type="text" name="description" id="description" class="form-control">
+            @error('description')
+                <div class="error text-danger">{{ $errors->first('description') }}</div>
+            @enderror
+        </div>
+        <button type="submit" class="btn btn-secondary">signup</button>
 
-<script>
-    const inputElement = document.querySelector('input[id="image"]');
-    const pond = FilePond.create(inputElement);
+    </form>
+    <script>
+        const inputElement = document.querySelector('input[id="image"]');
+        const pond = FilePond.create(inputElement);
 
-    FilePond.setOptions({
-        server: {
-            url: '/dashboard/upload',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        FilePond.setOptions({
+            server: {
+                url: '/dashboard/upload',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
 @endsection

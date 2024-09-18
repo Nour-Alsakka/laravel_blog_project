@@ -34,9 +34,9 @@ Route::group([
     'as' => 'dashboard.'
 ], function () {
 
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/', [DashboardController::class, 'index'])->name('index')->middleware(\App\Http\Middleware\role::class);
     Route::post('/upload', [UploadController::class, 'upload_image'])->name('upload');
     Route::resource('posts', BlogsController::class);
-    Route::resource('authors', AuthorsController::class);
+    Route::resource('authors', AuthorsController::class)->middleware(\App\Http\Middleware\role::class);
     Route::resource('categories', CategoriesController::class);
 });

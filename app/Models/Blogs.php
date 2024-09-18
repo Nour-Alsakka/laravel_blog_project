@@ -19,8 +19,12 @@ class Blogs extends Model
 
     public function author()
     {
-        return $this->belongsTo(Authors::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
+    // public function author()
+    // {
+    //     return $this->belongsTo(Authors::class, 'author_id');
+    // }
 
     // public function categories()
     // {

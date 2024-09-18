@@ -29,6 +29,8 @@
                             </span>
                         </p>
                         <h5><a href="{{ url('news/' . $blog->id) }}">{{ $blog->title }}</a></h5>
+                        <livewire:like-blog :blog="$blog" />
+
                     </div>
                 @endforeach
             </div>

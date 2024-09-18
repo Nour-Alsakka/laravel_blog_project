@@ -16,21 +16,14 @@ class Blogs extends Model
         'author_id',
         'slider',
     ];
-
+    public function likes()
+    {
+        return $this->hasMany(Likes::class);
+    }
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
     }
-    // public function author()
-    // {
-    //     return $this->belongsTo(Authors::class, 'author_id');
-    // }
-
-    // public function categories()
-    // {
-    //     return $this->hasMany(categoriesPosts::class, 'post_id', 'id');
-    // }
-
     public function categories()
     {
         return $this->belongsToMany(Categories::class);

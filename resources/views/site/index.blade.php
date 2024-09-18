@@ -47,13 +47,15 @@
                     @foreach ($category->blogs as $post)
                         <div class="row mb-3">
                             <div class="col-3  @if ($counter == 0) col-12 first-blog @endif">
-                                <img style="width: 90px; height: 70px; object-fit: cover; border-radius: 10px"
+                                <img class="blog_img"
+                                    style="width: 90px; height: 70px; object-fit: cover; border-radius: 10px"
                                     src="{{ url('storage/media/' . $post->image) }}">
                             </div>
-                            <div class=" col-9">
+                            <div class=" col-9 @if ($counter == 0)mb-3 col-12 first-blog @endif">
                                 <h6><a href="{{ url('news/' . $post->id) }}">{{ $post->title }}</a></h6>
                                 <p class="row">
-                                    <span class="col-8" style="font-size: 12px;">
+                                    <span class="col-3 @if ($counter == 0) col-4 @endif"
+                                        style="font-size: 12px;">
                                         @if ($post->author->image)
                                             <img src="{{ url('storage/media/' . $post->author->image) }}"
                                                 style="margin-right:4px;width: 25px; height:25px;object-fit:cover;border-radius:50px;"
@@ -64,9 +66,15 @@
                                         @endif
                                         {{ $post->author->name }}
                                     </span>
-                                    <span class="col-4  text-end" style="font-size: 12px;color:#777">
+                                    <span class="col-4  text-end @if ($counter == 0) col-4 @endif"
+                                        style="font-size: 12px;color:#777">
                                         {{ date('d-m-Y', strtotime($post->created_at)) }}
                                     </span>
+                                    <span class="col-2 text-end @if ($counter == 0) col-2 @endif"
+                                        style="font-size: 11px;color:#b53434;@if ($counter == 0) font-size: 14px;@endif">
+                                        {{ $post->likes_count }} <i class="fa fa-heart"></i>
+                                    </span>
+
                                 </p>
                             </div>
                         </div>

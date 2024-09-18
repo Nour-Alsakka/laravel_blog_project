@@ -100,7 +100,7 @@ a {
   max-height: 700px;
 }
 
-.first-blog img {
+.first-blog .blog_img {
   width: 100% !important;
   height: 200px !important;
   margin-bottom: 10px;

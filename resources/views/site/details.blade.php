@@ -23,5 +23,7 @@
         </div>
         <h2 class="mb-4">{{ $blog->title }}</h2>
         <p>{!! $blog->content !!}</p>
+        <livewire:like-blog :blog="$blog" />
+
     </div>
 @endsection

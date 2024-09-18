@@ -24,13 +24,18 @@ class SiteController extends Controller
         $user->addRole($owner);
 
         $categories = Categories::with(['blogs' => function ($q) {
-            $q->limit(4);
+            $q->withCount('likes')->limit(4);
         }])->get();
         // $categories = Categories::with('blogs')->get();
         // $categories = Categories::get();
 
         $latest_posts = Blogs::latest()->limit(3)->get();
-        $popular_posts = Blogs::limit(3)->get();
+        // return $categories;
+        // $popular_posts = Blogs::limit(3)->get();
+        $popular_posts = Blogs::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->limit(3)
+            ->get();
 
         $slider_posts = Blogs::latest()->where('slider', 1)->get();
 
@@ -49,7 +54,10 @@ class SiteController extends Controller
         }])->get();
 
         $latest_posts = Blogs::latest()->limit(3)->get();
-        $popular_posts = Blogs::limit(3)->get();
+        $popular_posts = Blogs::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->limit(3)
+            ->get();
 
 
         $blog = Blogs::with('author', 'categories')->find($id);
@@ -65,7 +73,10 @@ class SiteController extends Controller
         }])->get();
 
         $latest_posts = Blogs::latest()->limit(3)->get();
-        $popular_posts = Blogs::limit(3)->get();
+        $popular_posts = Blogs::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->limit(3)
+            ->get();
 
         $category = Categories::with('blogs')->find($id);
         // return $category;

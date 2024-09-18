@@ -48,23 +48,24 @@ class BlogsController extends Controller
 
         try {
 
-            $check =  Blogs::create([
+            Blogs::create([
                 'title' => $request->title,
                 'content' => $request->content,
                 'author_id' => $request->author_id,
                 'image' => $request->image,
+                'slider' => $request->slider,
             ]);
             // Blogs::create($request->all());
 
-            if ($check) {
-                // foreach ($request->categories as $category) {
-                //     categoriesPosts::create([
-                //         'post_id' => $check->id,
-                //         'category_id' => $category,
-                //     ]);
-                // }
-                return back()->with('success', 'The Blog has inserted successfully');
-            }
+            // if ($check) {
+            // foreach ($request->categories as $category) {
+            //     categoriesPosts::create([
+            //         'post_id' => $check->id,
+            //         'category_id' => $category,
+            //     ]);
+            // }
+            return back()->with('success', 'The Blog has inserted successfully');
+            // }
         } catch (Exception $e) {
 
             return back()->withErrors(['error' => 'something happend']);

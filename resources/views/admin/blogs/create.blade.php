@@ -28,7 +28,7 @@
         @csrf
         <div class="card">
             <div class="card-header text-center">
-                <h5>Add New Author</h5>
+                <h5>Add New Post</h5>
             </div>
             <div class="card-body">
                 <div class="mb-3">

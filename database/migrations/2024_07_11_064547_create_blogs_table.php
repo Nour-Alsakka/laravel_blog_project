@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('image')->nullable();
             $table->integer('author_id');
-            $table->integer('slider');
+            $table->integer('slider')->default(0);
             $table->timestamps();
         });
     }

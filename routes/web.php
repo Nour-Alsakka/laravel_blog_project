@@ -38,5 +38,6 @@ Route::group([
     Route::post('/upload', [UploadController::class, 'upload_image'])->name('upload');
     Route::resource('posts', BlogsController::class);
     Route::resource('authors', AuthorsController::class)->middleware(\App\Http\Middleware\role::class);
+    Route::get('/authors/{id}/blogs', [AuthorsController::class,'author_blogs'])->middleware(\App\Http\Middleware\role::class)->name('admin.authors.author_blogs');
     Route::resource('categories', CategoriesController::class);
 });

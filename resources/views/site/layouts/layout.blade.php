@@ -6,7 +6,6 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>YEP Blog</title>
 
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
@@ -17,7 +16,7 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/swipper.js') }}"></script>
-
+    <title>N blog</title>
     @yield('cssAndJs')
 </head>
 
@@ -60,7 +59,6 @@
             </button>
         </div>
     </nav>
-    <div id="div1">
 
     </div>
 
@@ -96,7 +94,7 @@
                         <div class="col-8">
                             <h6><a href="{{ url('news/' . $post->id) }}">{{ $post->title }}</a></h6>
                             <p class="row">
-                                <span class="col-4" style="font-size: 12px;color:brown">abcdefgh</span>
+                                {{-- <span class="col-4" style="font-size: 12px;color:brown">abcdefgh</span> --}}
                                 <span class="col-8" style="font-size: 12px;color:#777">{{ $post->created_at }}</span>
                             </p>
                         </div>
@@ -116,7 +114,7 @@
                         <div class=" col-8">
                             <h6><a href="{{ url('news/' . $post->id) }}">{{ $post->title }}</a></h6>
                             <p class="row">
-                                <span class="col-4" style="font-size: 12px;color:brown">abcdefgh</span>
+                                {{-- <span class="col-4" style="font-size: 12px;color:brown">abcdefgh</span> --}}
                                 <span class="col-8" style="font-size: 12px;color:#777">{{ $post->created_at }}</span>
                             </p>
                         </div>

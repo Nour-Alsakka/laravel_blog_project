@@ -16,6 +16,7 @@
                     <tr>
                         <th scope="col">الصورة</th>
                         <th scope="col">الاسم</th>
+                        <th scope="col">عدد المنشورات</th>
                         <th scope="col">الوصف</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -33,6 +34,9 @@
                                 @endif
                             </td>
                             <td>{{ $author->name }}</td>
+                            <td><a href="{{ url('dashboard/authors/' . $author->id . '/blogs') }}" class="btn btn-primary ">
+                                    {{ $author->blogs_num }}</td>
+                            </a>
                             <td>{{ $author->description }}</td>
                             <td>
                                 @if ($author->email === 'admin@admin.com')

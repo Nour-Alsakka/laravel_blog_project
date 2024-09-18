@@ -3,7 +3,7 @@
 @section('main')
     <div class="container" style="padding-top: 100px">
 
-        <h4 class="text-capitalize text-center">Article about {{ $category->name }}</h4>
+        <h4 class="text-capitalize text-center">Articles about {{ $category->name }}</h4>
         <div class="row p-0 mb-3">
             @foreach ($category->blogs as $blog)
                 <div class="col-12 col-lg-6 col-md-6 category-blog my-2">
@@ -31,5 +31,13 @@
                 </div>
             @endforeach
         </div>
+
+        <h5 class="text-center mb-2">Show All Blog for each Category</h5>
+        <div class="mb-5" style="display: flex;gap:10px;justify-content:center">
+            @foreach ($categories as $category)
+                <a class="btn btn-secondary" aria-current="page" href="/category/{{ $category->id }}">{{ $category->name }}</a>
+            @endforeach
+        </div>
+
     </div>
 @endsection

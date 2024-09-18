@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Authors;
+use App\Models\Blogs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -19,10 +20,21 @@ class AuthorsController extends Controller
     public function index()
     {
         // $authors = Authors::get();
+        $blogs  = Blogs::get();
         $authors = User::get();
+        foreach ($authors as $author) {
+            $author->blogs_num = $blogs->where('author_id', $author->id)->count();
+        }
 
         return view('admin.authors.index', compact('authors'));
     }
+    public function author_blogs($id)
+    {
+        $blogs  = Blogs::where('author_id', $id)->get();
+        $author = User::where('id', $id)->first();
+        return view('admin.authors.author_blogs', compact('blogs', 'author'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

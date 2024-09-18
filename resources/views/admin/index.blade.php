@@ -1,5 +1,6 @@
 @extends('admin.layout')
 
 @section('main')
-    {{ $j }}
+
+    hello
 @endsection

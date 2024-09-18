@@ -1,0 +1,130 @@
+:root {
+  --fs-main: #;
+  --fs-back: #;
+}
+
+.header-logo {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.header-logo img {
+  width: 20%;
+}
+
+.header-menu {
+  text-align: center;
+  padding: 10px;
+  border-top: 0.5px solid #bbb;
+  border-bottom: 0.5px solid #bbb;
+}
+
+.header-menu span {
+  padding: 0 25px;
+}
+footer h5 {
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  border-bottom: 0.5px solid #ccc;
+}
+footer .about img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+footer .about p {
+  text-align: center;
+  margin: 10px 0;
+  color: #777;
+  font-size: 15px;
+}
+p {
+  margin: 0;
+}
+/*
+footer .posts img {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+}
+
+footer .posts .content {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+footer .posts .content .red {
+    color: rgb(190, 0, 0);
+    margin-right: 20px;
+}
+footer .posts .content .white {
+    color: #888;
+
+}
+footer .down {
+    margin: 30px 0;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    background-color: #eee;
+    padding: 30px 0;
+} */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  /* height: 100vh; */
+  height: calc(100vh - 76px);
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-height: 700px;
+}
+
+.first-blog img {
+  width: 100% !important;
+  height: 200px !important;
+  margin-bottom: 10px;
+}
+
+.category-blog .blog-img {
+  width: 100% !important;
+  height: 300px !important;
+  margin-bottom: 10px;
+}
+#search-results {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
+
+  background-color: #fff;
+}
+#search-results p {
+  border-top: 1px solid #ccc;
+  padding: 4px 10px;
+  transition: 0.4s;
+}
+
+#search-results p:hover {
+  background-color: #fcde7c;
+}

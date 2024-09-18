@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AuthRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function login()
-    {
+    public function login(){
         return view('admin.login');
     }
-    public function login_check(AuthRequest $request)
-    {
+
+    public function login_check(LoginRequest $request){
+
         $email = $request->email;
         $password = $request->password;
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $request->session()->regenerate();
             return redirect('/dashboard');
-        } else {
+        }else{
             return 'wrong data';
         }
+
     }
 
-
-    public function logout(Request $request)
-    {
+    public function logout(Request $request){
 
         Auth::logout();
 
@@ -37,4 +37,6 @@ class AuthController extends Controller
 
         return redirect()->route('login');
     }
+
+
 }

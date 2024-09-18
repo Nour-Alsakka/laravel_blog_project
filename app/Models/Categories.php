@@ -11,9 +11,12 @@ class Categories extends Model
 
     protected $fillable = [
         'name',
-        'image'
+        'image',
     ];
-
+    // public function posts()
+    // {
+    //     return $this->hasMany(categoriesPosts::class, 'category_id', 'id');
+    // }
     public function blogs()
     {
         return $this->belongsToMany(Blogs::class);

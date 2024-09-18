@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoriesRequest;
 use App\Models\Categories;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -13,6 +15,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Categories::get();
+
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -27,14 +30,20 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        $check =  Categories::create([
-            'name' => $request->name,
-            'image' => $request->image,
-        ]);
-        if ($check) return back()->with('success', 'The category has inserted successfully.');
-        else return back()->withErrors(['errors', 'something happend']);
+        try {
+            //insert to db
+            Categories::create([
+                'name' => $request->name,
+                'image' => $request->image,
+            ]);
+
+            return back()->with('success', 'The category has inserted successfully');
+        } catch (Exception $e) {
+
+            return back()->withErrors(['error' => 'something happend']);
+        }
     }
 
     /**
@@ -48,24 +57,35 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categories $categories)
+    public function edit($id)
     {
-        //
+        $category = Categories::find($id);
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(CategoriesRequest $request, Categories $category)
     {
-        //
+        // dd($author);
+        $category->name = $request->name;
+
+        if ($request->image != null) {
+            $category->image = $request->image;
+        }
+
+        $category->save();
+        return back()->with('success', 'updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $categories)
+    public function destroy(Categories $category)
     {
-        //
+        $category->delete();
+        return back();
     }
 }

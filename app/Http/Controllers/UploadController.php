@@ -9,6 +9,7 @@ class UploadController extends Controller
 {
     public function upload_image(Request $request)
     {
+        //upload image
         if (!File::exists(storage_path('app/public/media'))) {
             File::makeDirectory(storage_path('app/public/media'));
         }
@@ -17,6 +18,7 @@ class UploadController extends Controller
         $name = $file->hashName();
         $filename = time() . '.' . $name;
         $file->storeAs('public/media/', $filename);
+
         return $filename;
     }
 }

@@ -14,7 +14,7 @@ class Blogs extends Model
         'content',
         'image',
         'author_id',
-        'slider'
+        'slider',
     ];
 
     public function author()
@@ -22,8 +22,13 @@ class Blogs extends Model
         return $this->belongsTo(Authors::class, 'author_id');
     }
 
+    // public function categories()
+    // {
+    //     return $this->hasMany(categoriesPosts::class, 'post_id', 'id');
+    // }
+
     public function categories()
     {
         return $this->belongsToMany(Categories::class);
     }
-};
+}

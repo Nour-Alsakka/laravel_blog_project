@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAuthorRequest;
+use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Authors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Mockery\Exception;
 
 class AuthorsController extends Controller
 {
@@ -14,6 +17,7 @@ class AuthorsController extends Controller
     public function index()
     {
         $authors = Authors::get();
+
         return view('admin.authors.index', compact('authors'));
     }
 
@@ -28,24 +32,22 @@ class AuthorsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAuthorRequest $request)
     {
-        if (!File::exists(storage_path('app/public/media'))) {
-            File::makeDirectory(storage_path('app/public/media'));
+        try {
+
+            //insert to db
+            Authors::create([
+                'name' => $request->name,
+                'description' => $request->des,
+                'image' => $request->image,
+            ]);
+
+            return back()->with('success', 'The Author has inserted successfully');
+        } catch (Exception $e) {
+
+            return back()->withErrors(['error' => 'something happend']);
         }
-
-        $file = $request->image;
-        $name = $file->hashName();
-        $filename = time() . '.' . $name;
-        $file->storeAs('public/media/', $filename);
-
-        $check =  Authors::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $filename,
-        ]);
-        if ($check) return back()->with('success', 'The author has inserted successfully.');
-        else return back()->withErrors(['errors', 'something happend']);
     }
 
     /**
@@ -59,24 +61,36 @@ class AuthorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Authors $authors)
+    public function edit($id)
     {
-        //
+        $author = Authors::find($id);
+
+        return view('admin.authors.edit', compact('author'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Authors $authors)
+    public function update(UpdateAuthorRequest $request, Authors $author)
     {
-        //
+        // dd($author);
+        $author->name = $request->name;
+        $author->description = $request->des;
+
+        if ($request->image != null) {
+            $author->image = $request->image;
+        }
+
+        $author->save();
+        return back()->with('success', 'updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Authors $authors)
+    public function destroy(Authors $author)
     {
-        //
+        $author->delete();
+        return back();
     }
 }

@@ -20,8 +20,12 @@ Route::get('/news/{id}', [SiteController::class, 'news_details'])->name('news.ne
 Route::get('/category/{id}', [SiteController::class, 'category_posts'])->name('category_posts');
 
 
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('register', [AuthController::class, 'store_user'])->name('store_user');
+
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login_check'])->name('login_check');
+
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group([

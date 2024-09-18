@@ -48,15 +48,21 @@ class BlogsController extends Controller
 
         try {
 
-            Blogs::create([
+            $blog = Blogs::create([
                 'title' => $request->title,
                 'content' => $request->content,
-                'author_id' => $request->author_id,
+                'author_id' => $request->user()->id,
                 'image' => $request->image,
                 'slider' => $request->slider,
             ]);
             // Blogs::create($request->all());
 
+            foreach ($request->categories as $category) {
+                DB::table('blogs_categories')->insert([
+                    'blogs_id' => $blog->id,
+                    'categories_id' => $category,
+                ]);
+            }
             // if ($check) {
             // foreach ($request->categories as $category) {
             //     categoriesPosts::create([

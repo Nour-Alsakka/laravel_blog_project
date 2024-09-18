@@ -14,11 +14,11 @@ class SiteController extends Controller
 {
     public function index()
     {
-        // $categories = Categories::get();
         $categories = Categories::with(['blogs' => function ($q) {
             $q->limit(4);
         }])->get();
         // $categories = Categories::with('blogs')->get();
+        // $categories = Categories::get();
 
         $latest_posts = Blogs::latest()->limit(3)->get();
         $popular_posts = Blogs::limit(3)->get();

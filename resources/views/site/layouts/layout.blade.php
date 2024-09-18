@@ -24,20 +24,18 @@
 <body>
     <nav class="navbar  navbar-expand-lg fixed-top " style="background-color:#eee">
         <div class="container ">
-            {{ __('auth.password') }}
+
             <a class="navbar-brand mx-5" href="{{ url('/') }}"><img class="img-fluid " style="width: 50px"
                     src="{{ asset('images/logo.png') }}"></a>
+            @auth
+                <a class="navbar-brand mx-5" href="{{ url('/') }}">{{ Auth::user()->name }}</a>
+                <a class=" mx-2" href="{{ url('/dashboard') }}">Go to Dashboard</a>
+            @else
+                <a class=" mx-2" href="{{ url('/register') }}">Register</a>
+                <a class=" mx-2" href="{{ url('/login') }}">Login</a>
+            @endauth
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @foreach ($categories as $category)
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page"
-                                href="/category/{{ $category->id }}">{{ $category->name }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+            
 
             {{-- <input style="outline: none;" class="right" id="search-box" type="text" oninput="reset_border()"> --}}
             <div class="search-box " style="position: relative;width:400px">

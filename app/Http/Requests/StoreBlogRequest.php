@@ -24,7 +24,6 @@ class StoreBlogRequest extends FormRequest
         return [
             'title' => 'required|string|max:255|min:10',
             'content' => 'required|string|min:10',
-            'author_id' => 'required|string',
             'slider' => 'required',
             'image' => 'required|max:200'
         ];

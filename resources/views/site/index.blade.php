@@ -20,9 +20,6 @@
         <div class="swiper-button-prev"></div>
     </div>
 
-    <div id="div1">external data</div>
-    <button>load</button>
-
     <script>
         $(document).ready(function() {
             $("button").click(function() {
@@ -31,7 +28,15 @@
         })
     </script>
 
-    <div class="row m-5">
+    <div class="container my-5">
+        <h5 class="text-center mb-2">Show All Blog for each Category</h5>
+        <div class="mb-5" style="display: flex;gap:10px;justify-content:center">
+            @foreach ($categories as $category)
+                    <a class="btn btn-secondary" aria-current="page"
+                        href="/category/{{ $category->id }}">{{ $category->name }}</a>
+            @endforeach
+        </div>
+    <div class="row ">
         @foreach ($categories as $category)
             <div class="col-12 col-lg-4 col-md-6">
                 <h5>{{ $category->name }}</h5>
@@ -66,6 +71,7 @@
 
             </div>
         @endforeach
+    </div>
     </div>
 
     <script>

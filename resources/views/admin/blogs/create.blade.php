@@ -28,7 +28,7 @@
         @csrf
         <div class="card">
             <div class="card-header text-center">
-                <h5>Add New Post</h5>
+                <h5>Add New Blog</h5>
             </div>
             <div class="card-body">
                 <div class="mb-3">
@@ -44,8 +44,7 @@
 
                 <div class="mb-3">
                     <div id="editor">
-                        <p>Hello World!</p>
-                        <p>Some initial <strong>bold</strong> text</p>
+                        <p>Type your <strong>blog content</strong> here!</p>
                         <p><br /></p>
                     </div>
                 </div>
@@ -55,20 +54,22 @@
                     <input type="file" class="form-control" name="image" id="image">
                 </div>
 
-                <div class="mb-3">
-                    <label for="author_id" class="form-label">Blog's Author</label>
-                    <select name="author_id" id="author_id" class="mt-2">
-                        @foreach ($authors as $author)
-                            <option value={{ $author->id }}>{{ $author->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                {{-- @if (Auth::user()->id == 1)
+                    <div class="mb-3">
+                        <label for="author_id" class="form-label">Blog's Author</label>
+                        <select name="author_id" id="author_id" class="mt-2">
+                            @foreach ($authors as $author)
+                                <option value={{ $author->id }}>{{ $author->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif --}}
 
                 <div class="mb-3">
                     <label for="slider" class="form-label">Slider</label>
                     <select name="slider" id="slider" class="mt-2">
-                        <option value='0'>No</option>
-                        <option value='1'>Yes</option>
+                        <option value=0>No</option>
+                        <option value=1>Yes</option>
                     </select>
                 </div>
 
@@ -106,13 +107,14 @@
 
         });
 
+        // new TomSelect("#author_id", {
+
+        // });
+
         new TomSelect("#slider", {
 
         });
 
-        new TomSelect("#author_id", {
-
-        });
 
         var quill = new Quill('#editor', {
             theme: 'snow'

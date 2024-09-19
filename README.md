@@ -1,49 +1,84 @@
 # Blog website with Laravel framework
 
-## At the Site part
-- you can see a slider of blogs 
-- Search input to search of blogs content (ajax and api)
-- Latest 4 blogs of each category
-- List of all categories so you can move to each one and see all category's blogs
-- for each blog there is image, title, author name and image, created date and count of likes
-- You can see blog's details and make like reaction and see the number of likes for that blog
-- At the footer there is the latest and popular blogs
-- At the nav there is register and login links for guest and Go to Dashboard link for logged user
-- Only logged user can react on blogs and guests can only see the number of likes
+## Overview
 
-## At the Dashboard part
-after register and login
-there is a roles system by laratrust package
-there is only one owner with name: admin, email: admin@admin.com, password: admin
-and all other registerd users take author role
+This is a blog website built with the Laravel framework, featuring a user-friendly interface for both site visitors and administrators. The website allows users to register, log in, and interact with blog posts, while administrators can manage blogs, categories, and users.
 
-#### The owner
-- See the statistic
-- Add blogs and control other user's blogs
+## Site Features
+
+### Homepage of the site
+
+- Slider showcasing blog we decided to show
+- Latest 4 blogs from each category
+- List of all categories with links to view all blogs in each category
+- Blog previews with image, title, author name and image, created date, and like count
+
+### Blog Details
+
+- View blog details
+- Make like reactions (for logged-in users only)
+- Display like count for each blog
+
+### Navigation
+
+- Register and login links for guests
+- Go to Dashboard link for logged-in users
+- Search input for searching blog content (using AJAX and API)
+
+### Footer
+
+- Latest blogs
+- Popular blogs
+
+## Dashboard Features
+
+### Roles System
+
+Implemented using Laratrust package
+
+- One owner role (admin@admin.com, password: admin) with elevated permissions
+- All other registered users are assigned the author role
+
+### Owner (Admin) Features
+
+- View website statistics
+- Add blogs and manage other user's blogs
 - Control author users
 - Add categories
-#### The Author
-- Add blogs and control his own blogs only
+
+### Author Features
+
+- Add and manage own blogs
 - Add categories
 
-## Packages used at this project 
-- ** Laratrust for permissions and roles
-- ** Livewire for users to make like reaction on blogs
+## Technical Details
 
-## JS and CSS Libraries
-- Filepond -> upload images
-- datatables -> for tables with search and pagination 
-- swipper -> for add slider
-- tom-select -> for select input
-- jquery -> for using ajax for real time search proccess
-- bootstrap -> to style the site
+### Packages used at this project
 
-### to install it 
-- clone the repo
-- cd to the project folder
-- php artisan migrate
-- php artisan db:seed
-- php artisan db:seed --class=RoleSeed
-- php artisan storage:link
-- php artisan serv
+- Laratrust for permissions and roles
+- Livewire for real-time like reactions
 
+### JS and CSS Libraries
+
+- Filepond for image uploads
+- Datatables for tables with search and pagination
+- Swipper for slider functionality
+- Tom-select for select inputs
+- jQuery for AJAX for search functionality
+- Bootstrap for styling
+
+## Installation
+
+1- Clone the repository
+2- Change directory to project folder (cd project-folder)
+3- Run `php artisan migrate` to set up the database
+4- Run php `artisan db:seed` to seed the database with initial data
+5- Run php `artisan db:seed --class=RoleSeed` to seed roles
+6- Run `php artisan storage:link` to set up storage links for images
+7- Run `php artisan serv` to start the development server
+
+## Getting Started
+
+1- Register as a user or log in as the admin (admin@admin.com, password: admin)
+2- Explore the site and dashboard features
+3- Start creating and managing blogs, categories, and user roles!

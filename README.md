@@ -69,16 +69,16 @@ Implemented using Laratrust package
 
 ## Installation
 
-- Item 1 Clone the repository
-- Item 2 Change directory to project folder (cd project-folder)
-- Item 3 Run `php artisan migrate` to set up the database
-- Item 4 Run php `artisan db:seed` to seed the database with initial data
-- Item 5 Run php `artisan db:seed --class=RoleSeed` to seed roles
-- Item 6 Run `php artisan storage:link` to set up storage links for images
-- Item 7 Run `php artisan serv` to start the development server
+1. Clone the repository
+2. Change directory to project folder (cd project-folder)
+3. Run `php artisan migrate` to set up the database
+4. Run php `artisan db:seed` to seed the database with initial data
+5. Run php `artisan db:seed --class=RoleSeed` to seed roles
+6. Run `php artisan storage:link` to set up storage links for images
+7. Run `php artisan serv` to start the development server
 
 ## Getting Started
 
-- Item 1 Register as a user or log in as the admin (admin@admin.com, password: admin)
-- Item 2 Explore the site and dashboard features
-- Item 3 Start creating and managing blogs, categories, and user roles!
+1. Register as a user or log in as the admin (admin@admin.com, password: admin)
+2. Explore the site and dashboard features
+3. Start creating and managing blogs, categories, and user roles!

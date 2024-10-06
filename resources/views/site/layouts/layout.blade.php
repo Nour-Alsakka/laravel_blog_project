@@ -96,14 +96,16 @@
                             <p class="row">
                                 {{-- <span class="col-4" style="font-size: 12px;color:brown">abcdefgh</span> --}}
                                 <span class="col-7" style="font-size: 12px;color:#777">{{ $post->created_at }}</span>
-                                <span class="col-3" style="font-size: 12px;color:#a24545">
+                                {{-- <span class="col-3" style="font-size: 12px;color:#a24545">
                                     @if ($post->likes_count)
                                         {{ $post->likes_count }}
                                     @else
                                         0
                                     @endif
                                     <i class="fa fa-heart"></i>
-                                </span>
+                                </span> --}}
+                                <span class="col-3" style="font-size: 12px;color:#a24545">
+                                    {{ $post->likes_count }} <i class="fa fa-heart"></i></span>
                             </p>
                         </div>
                     </div>

@@ -72,8 +72,8 @@ Implemented using Laratrust package
 1. Clone the repository and change directory to project folder (cd project-folder)
 2. Run `composer install` to install packages
 3. Run `php artisan migrate` to set up the database
-4. Run php `artisan db:seed` to seed the database with initial data
-5. Run php `artisan db:seed --class=RoleSeed` to seed roles
+4. Run `php artisan db:seed` to seed the database with initial data
+5. Run `php artisan db:seed --class=RoleSeed` to seed roles
 6. Run `php artisan storage:link` to set up storage links for images
 7. Run `php artisan serv` to start the development server
 

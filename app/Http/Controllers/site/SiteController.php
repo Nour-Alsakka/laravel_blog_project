@@ -29,7 +29,7 @@ class SiteController extends Controller
         // $categories = Categories::with('blogs')->get();
         // $categories = Categories::get();
 
-        $latest_posts = Blogs::latest()->limit(3)->get();
+        $latest_posts = Blogs::withCount('likes')->latest()->limit(3)->get();
         // return $categories;
         // $popular_posts = Blogs::limit(3)->get();
         $popular_posts = Blogs::withCount('likes')
@@ -53,7 +53,7 @@ class SiteController extends Controller
             $query->limit(4);
         }])->get();
 
-        $latest_posts = Blogs::latest()->limit(3)->get();
+        $latest_posts = Blogs::withCount('likes')->latest()->limit(3)->get();
         $popular_posts = Blogs::withCount('likes')
             ->orderBy('likes_count', 'desc')
             ->limit(3)
@@ -72,7 +72,7 @@ class SiteController extends Controller
             $q->limit(4);
         }])->get();
 
-        $latest_posts = Blogs::latest()->limit(3)->get();
+        $latest_posts = Blogs::withCount('likes')->latest()->limit(3)->get();
         $popular_posts = Blogs::withCount('likes')
             ->orderBy('likes_count', 'desc')
             ->limit(3)

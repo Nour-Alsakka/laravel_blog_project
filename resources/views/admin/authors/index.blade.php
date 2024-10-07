@@ -54,7 +54,7 @@
                                             <i class="fa-solid fa-edit mx-2 text-white"></i>
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger ">
+                                        <button type="submit" onclick="return confirm('Are you sure? If you delete then all related blogs will delete.')" class="btn btn-danger ">
                                             <i class="fa-solid fa-trash mx-2 text-white"></i>
                                         </button>
                                     </form>

@@ -115,6 +115,8 @@ class AuthorsController extends Controller
     public function destroy($id)
     {
         $author = User::find($id);
+        Blogs::where('author_id', $id)->delete();
+
         $author->delete();
         return back();
         // return redirect('/dashboard/authors');

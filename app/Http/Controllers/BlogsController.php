@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Authors;
 use App\Models\Blogs;
+use App\Models\BlogsCategories;
 use App\Models\Categories;
 use App\Models\categoriesPosts;
 use App\Models\User;
@@ -134,10 +135,14 @@ class BlogsController extends Controller
             $blog->image = $request->image;
         }
 
-        DB::table('blogs_categories')->where('blogs_id', $id)->delete();
+        BlogsCategories::where('blogs_id', $id)->delete();
 
         foreach ($request->categories as $category) {
-            DB::table('blogs_categories')->insert([
+            // DB::table('blogs_categories')->insert([
+            //     'blogs_id' => $id,
+            //     'categories_id' => $category,
+            // ]);
+            BlogsCategories::create([
                 'blogs_id' => $id,
                 'categories_id' => $category,
             ]);

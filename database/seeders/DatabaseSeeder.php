@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\BlogsCategories;
+use App\Models\Categories;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,13 +25,24 @@ class DatabaseSeeder extends Seeder
             'description' => 'admin is the owner of this site',
         ]);
 
+        $categories = ['reading', 'cook', 'sport', 'life_style'];
+        foreach ($categories as $category) {
+            Categories::create([
+                'name' => $category,
+                'image' => 'image.jpg',
+            ]);
+        }
+
         $this->call([
             UserSeeder::class,
         ]);
 
         $this->call([
-            RoleSeed::class,
+            BlogsCategoriesSeeder::class,
         ]);
 
+        $this->call([
+            RoleSeed::class,
+        ]);
     }
 }

@@ -21,7 +21,7 @@ class BlogsFactory extends Factory
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph,
             'image' => $this->faker->randomElement(['img (1).jpg', 'img (1)', 'img (2).webp']),
-            'user_id' => User::factory(),
+            'user_id' => User::factory(), // here we create new user
             'slider' => $this->faker->randomElement([0, 1]),
         ];
     }

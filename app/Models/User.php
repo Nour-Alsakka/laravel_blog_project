@@ -28,6 +28,11 @@ class User extends Authenticatable implements LaratrustUser
         'description'
     ];
 
+    public function blogs()
+    {
+        return $this->hasMany(Blogs::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

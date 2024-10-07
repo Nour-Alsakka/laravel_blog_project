@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         $authors = User::get();
         foreach ($authors as $author) {
-            $author->blogs_num = $blogs->where('author_id', $author->id)->count();
+            $author->blogs_num = $blogs->where('user_id', $author->id)->count();
         }
         // return $authors;
         return view('admin.index', compact(

@@ -23,14 +23,14 @@ class AuthorsController extends Controller
         $blogs  = Blogs::get();
         $authors = User::get();
         foreach ($authors as $author) {
-            $author->blogs_num = $blogs->where('author_id', $author->id)->count();
+            $author->blogs_num = $blogs->where('user_id', $author->id)->count();
         }
 
         return view('admin.authors.index', compact('authors'));
     }
     public function author_blogs($id)
     {
-        $blogs  = Blogs::where('author_id', $id)->get();
+        $blogs  = Blogs::where('user_id', $id)->get();
         $author = User::where('id', $id)->first();
         return view('admin.authors.author_blogs', compact('blogs', 'author'));
     }
@@ -76,7 +76,7 @@ class AuthorsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Authors $authors)
+    public function show(User $authors)
     {
         //
     }
@@ -115,7 +115,7 @@ class AuthorsController extends Controller
     public function destroy($id)
     {
         $author = User::find($id);
-        Blogs::where('author_id', $id)->delete();
+        Blogs::where('user_id', $id)->delete();
 
         $author->delete();
         return back();

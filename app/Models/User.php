@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable implements LaratrustUser
 {
     use HasFactory, Notifiable, HasRolesAndPermissions;
-    // use SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

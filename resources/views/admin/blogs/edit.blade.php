@@ -65,10 +65,10 @@
                 </div>
 
                 {{-- <div class="mb-3">
-                    <label for="author_id" class="form-label">Blog's Author</label>
-                    <select name="author_id" id="author_id" class="mt-2">
+                    <label for="user_id" class="form-label">Blog's Author</label>
+                    <select name="user_id" id="user_id" class="mt-2">
                         @foreach ($authors as $author)
-                        <option value={{ $author->id }} @if ($author->id == $blog->author_id) selected @endif>
+                        <option value={{ $author->id }} @if ($author->id == $blog->user_id) selected @endif>
                             {{ $author->name }}
                         </option>
                         @endforeach
@@ -140,7 +140,7 @@
 
         });
 
-        // new TomSelect("#author_id", {
+        // new TomSelect("#user_id", {
 
         // });
 

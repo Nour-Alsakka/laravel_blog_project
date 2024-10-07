@@ -56,8 +56,8 @@
 
                 {{-- @if (Auth::user()->id == 1)
                     <div class="mb-3">
-                        <label for="author_id" class="form-label">Blog's Author</label>
-                        <select name="author_id" id="author_id" class="mt-2">
+                        <label for="user_id" class="form-label">Blog's Author</label>
+                        <select name="user_id" id="user_id" class="mt-2">
                             @foreach ($authors as $author)
                                 <option value={{ $author->id }}>{{ $author->name }}</option>
                             @endforeach
@@ -107,7 +107,7 @@
 
         });
 
-        // new TomSelect("#author_id", {
+        // new TomSelect("#user_id", {
 
         // });
 

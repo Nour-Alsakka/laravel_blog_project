@@ -8,6 +8,7 @@ use App\Models\Authors;
 use App\Models\Blogs;
 use App\Models\Categories;
 use App\Models\categoriesPosts;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,14 +21,14 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        // $blogs = Blogs::leftJoin('authors', 'authors.id', '=', 'blogs.author_id')
+        // $blogs = Blogs::leftJoin('authors', 'authors.id', '=', 'blogs.user_id')
         //     ->select('blogs.*', 'authors.name as author_name')
         //     ->get();
 
         if (Auth::user()->hasRole('owner')) {
             $blogs = Blogs::with('author')->get();
         } else {
-            $blogs = Blogs::with('author')->where('author_id', Auth::user()->id)->get();
+            $blogs = Blogs::with('author')->where('user_id', Auth::user()->id)->get();
         }
 
         return  View('admin.blogs.index', compact('blogs'));
@@ -56,7 +57,7 @@ class BlogsController extends Controller
             $blog = Blogs::create([
                 'title' => $request->title,
                 'content' => $request->content,
-                'author_id' => $request->user()->id,
+                'user_id' => $request->user()->id,
                 'image' => $request->image,
                 'slider' => $request->slider,
             ]);
@@ -98,7 +99,7 @@ class BlogsController extends Controller
     public function edit($id)
     {
         $blog = Blogs::with('author', 'categories')->find($id);
-        $authors = Authors::get();
+        $authors = User::get();
         $categories = Categories::get();
         if (Auth::user()->hasRole('owner') || Auth::user()->id == $blog->author->id) {
             // return Auth::user()->id == $blog->author->id;
@@ -126,7 +127,7 @@ class BlogsController extends Controller
 
         $blog->title = $request->title;
         $blog->content = $request->content;
-        // $blog->author_id = $request->author_id;
+        // $blog->user_id = $request->user_id;
         $blog->slider = $request->slider;
 
         if ($request->image != null) {

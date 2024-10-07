@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoleSeed extends Seeder
 {
@@ -51,6 +52,10 @@ class RoleSeed extends Seeder
         $owner->givePermissions([$manage_blogs, $manage_users]);
         $author->givePermission($have_blogs);
 
-        
+        /// add role to admin
+        // DB::role_user->create()
+        // $owner = Role::where('name', 'owner')->first();
+        $user = User::where('email', 'admin@admin.com')->first();
+        $user->addRole($owner);
     }
 }

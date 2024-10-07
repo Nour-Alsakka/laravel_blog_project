@@ -15,9 +15,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        $this->call([
-            UserSeeder::class,
-        ]);
 
         User::factory()->create([
             'name' => 'Admin',
@@ -25,5 +22,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
             'description' => 'admin is the owner of this site',
         ]);
+
+        $this->call([
+            UserSeeder::class,
+        ]);
+
+        $this->call([
+            RoleSeed::class,
+        ]);
+
     }
 }

@@ -20,8 +20,8 @@ class SiteController extends Controller
         // add role to user
         $owner = Role::where('name', 'owner')->first();
         $user = User::where('email', 'admin@admin.com')->first();
-        $user->removeRole($owner);
-        $user->addRole($owner);
+        // $user->removeRole($owner);
+        // $user->addRole($owner);
 
         $categories = Categories::with(['blogs' => function ($q) {
             $q->withCount('likes')->limit(4);
